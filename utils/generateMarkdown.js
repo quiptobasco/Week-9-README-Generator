@@ -4,7 +4,7 @@ function renderLicenseBadge(license) {
     if (!license || license == "None") {
         return '';
     } else {
-        return '![Badge](https://img.shields.io/badge/License-' + license.replace(/-/g, '%20') + '-orange)';
+        return `![Badge](https://img.shields.io/badge/License-${license.replace(/-/g, '%20')}-orange)`;
     }
 }
 
@@ -14,7 +14,7 @@ function renderLicenseLink(license) {
     if (!license || license == "None") {
         return '';
     } else {
-        return 'https://choosealicense.com/licenses/' + license.toLowerCase() + '/';
+        return `https://choosealicense.com/licenses/${license.toLowerCase()}/`;
     }
 }
 
@@ -25,7 +25,7 @@ function renderLicenseSection(license) {
         return '';
     } else {
         return `## License 
-Licensed under the [` + license + `](` + renderLicenseLink(license) + `) license.` 
+Licensed under the [${license}](${renderLicenseLink(license)}) license.` 
     }
 }
 
@@ -34,7 +34,7 @@ function renderScreenshot(screenshot) {
         return '';
     } else {
     let screenshotArray = [];
-    screenshot.forEach(file => screenshotArray.push('![screenshot](assets/images/' + file + '/)'));
+    screenshot.forEach(file => screenshotArray.push(`![screenshot](./assets/images/${file})`));
     return `## Screenshots` + '\n' + screenshotArray.join('\n');
     }
 }
@@ -42,18 +42,16 @@ function renderScreenshot(screenshot) {
 function unpackTOC(data) {
     let tocArray = [];
     const allowed = ['Description', 'Installation', 'Usage', 'License', 'Contributions', 'Test'];
-
     const filtered = Object.keys(data)
-    .filter(key => allowed.includes(key))
-    .reduce((obj, key) => {
-        obj[key] = data[key];
-    return obj;
-    }, {});
+                    .filter(key => allowed.includes(key))
+                    .reduce((obj, key) => {
+                        obj[key] = data[key];
+                    return obj;
+                    }, {});
 
     Object.entries(filtered).forEach(([key, value]) => {
         tocArray.push(`- [${key}](#${key.toLowerCase()})`);
     });
-    
     return tocArray.join('\n');
 }
 
