@@ -40,11 +40,20 @@ function renderScreenshot(screenshot) {
 }
 
 function unpackTOC(data) {
-    delete data['Title'];
-    delete data['Username'];
-    delete data['Email'];
     let tocArray = [];
-    Object.keys(data).forEach(key => tocArray.push('- [' + key + '](#' + key.toLowerCase() + ')'));
+    const allowed = ['Description', 'Installation', 'Usage', 'License', 'Contributions', 'Test'];
+
+    const filtered = Object.keys(data)
+    .filter(key => allowed.includes(key))
+    .reduce((obj, key) => {
+        obj[key] = data[key];
+    return obj;
+    }, {});
+
+    Object.entries(filtered).forEach(([key, value]) => {
+        tocArray.push(`- [${key}](#${key.toLowerCase()})`);
+    });
+    
     return tocArray.join('\n');
 }
 
@@ -60,16 +69,13 @@ ${unpackTOC(data)}
 ## Description
 ${data.Description}
 
+${renderScreenshot(data.Screenshots)}
+
 ## Installation
 ${data.Installation}
 
 ## Usage
 ${data.Usage}
-
-${renderScreenshot(data.Screenshots)}
-
-## Credits
-${data.Contribution}
 
 ${renderLicenseSection(data.License)}
 
@@ -77,6 +83,9 @@ ${renderLicenseSection(data.License)}
 Any questions?
 * [GitHub](https://github.com/${data.Username})
 * [${data.Email}](mailto:${data.Email})
+
+## Contributions
+${data.Contributions}
 
 ## Tests
 ${data.Tests}

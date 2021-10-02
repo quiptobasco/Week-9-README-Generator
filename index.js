@@ -3,16 +3,16 @@ const fs = require('fs');
 const inq = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
-const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const dirPath = path.join(__dirname, 'assets/images');
 
-const confirmEmailValid = async (input) => {
-    if (!re.test(input)) {
-        return 'Invalid format.  Try again.';
-    }
-    return true;
-}
+// const confirmEmailValid = async (input) => {
+//     if (!re.test(input)) {
+//         return 'Invalid format.  Try again.';
+//     }
+//     return true;
+// }
 
 // TODO: Create an array of questions for user input
 const questions = [{
@@ -38,7 +38,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Enter the CONTRIBUTION GUIDELINES for the project.',
-    name: 'Contribution',
+    name: 'Contributions',
 },
 {
     type: 'input',
@@ -75,7 +75,7 @@ const questions = [{
     type: 'input',
     message: 'Enter your EMAIL ADDRESS.',
     name: 'Email',
-    validate: confirmEmailValid
+    // validate: confirmEmailValid
 },
 ];
 
