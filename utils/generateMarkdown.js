@@ -7,7 +7,6 @@ var id = '';
 function getLicenseText(license, array) {
         for (let value of Object.values(array)) {
             if (value.name == license && value.name !== 'None') {
-                console.log(value);
                 axios.get(value.url)
                 .then(function (response) {
                     fs.writeFileSync('LICENSE.txt', response.data.body);
@@ -39,7 +38,6 @@ function generateLinks(license, array) {
     }
     for (let value of Object.values(array)) {
         if (value.name == license && value.name !== 'None') {
-            console.log(value)
             id = value.spdx_id;
             licenseSection = `## License 
 Licensed under the [${license}](https://choosealicense.com/licenses/${value.key}/) license.`;

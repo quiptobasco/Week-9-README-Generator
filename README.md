@@ -1,6 +1,6 @@
-# cwvwc
+# README-Generator
 
-![Badge](https://img.shields.io/badge/License-AGPL%203.0-orange)
+![Badge](https://img.shields.io/badge/License-MIT-orange)
 
 ## Table of Contents
 - [Description](#description)
@@ -10,27 +10,27 @@
 - [License](#license)
 
 ## Description
-wvcwvw
+A CLI application to generate a quality README filr for your project using the provided answers to the prompts.
 
 ## Screenshots
-![screenshot](./assets/images/youtubelinks.png)
+![screenshot](./assets/images/screenshot.PNG)
 
 ## Installation
-cwwwvc w
+npm i
 
 ## Usage
-wvcwwvwc
+node .\index.js
 
 ## License 
-Licensed under the [AGPL-3.0](https://choosealicense.com/licenses/agpl-3.0/) license.
+Licensed under the [MIT License](https://choosealicense.com/licenses/mit/) license.
 
 ## Questions
 Any questions?
-* [GitHub](https://github.com/wvcwwvc)
-* [vwcwwvc](mailto:vwcwwvc)
+* [GitHub](https://github.com/quiptobasco)
+* [quiptobasco@gmail.com](mailto:quiptobasco@gmail.com)
 
 ## Contributions
-wvcwwvcwvwc
+quiptobasco
 
 ## Tests
-wvcvwwvcwvwc
+
