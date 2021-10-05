@@ -2,16 +2,38 @@ const path = require('path');
 const fs = require('fs');
 const inq = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
-
-// const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const axios = require('axios');
 
 const dirPath = path.join(__dirname, 'assets/images');
 
-// const confirmEmailValid = async (input) => {
-//     if (!re.test(input)) {
-//         return 'Invalid format.  Try again.';
-//     }
-//     return true;
+const licensesArray = [];
+const URL = 'https://api.github.com/licenses';
+const noneObj = {key: "None", name: "None", spdx_id: "None", url: "None", node_id: "None"};
+
+function generateLicenses() {
+    axios.get(URL)
+    .then(function (response) {
+        response.data.forEach((license) => {
+            licensesArray.push(license);
+        });
+        licensesArray.push(noneObj);
+        return licensesArray;
+    })
+    .catch(function (error) {
+        console.log('There was an error with the API call: ' + error);
+    });
+}
+
+// function getLicenseText(array) {
+//     for (let value of Object.values(array)) {
+//         if (value.name == license && value.name !== 'None') {
+//     axios.get(URL)
+//     .then(function () {
+//         console.log(response.data);
+//     })
+//     .catch(function (error) {
+//         console.log('There was an error with the API call: ' + error);
+//     });
 // }
 
 // TODO: Create an array of questions for user input
@@ -48,22 +70,7 @@ const questions = [{
 {
     type: 'list',
     message: 'Select the appropriate license for this project: ',
-    choices: [
-        "AGPL-3.0",
-        "Apache-2.0", 
-        "BSD-2-Clause", 
-        "BSD-3-Clause", 
-        "BSL-1.0", 
-        "CC0-1.0", 
-        "EPL-2.0", 
-        "GPL-2.0",
-        "GPL-3.0", 
-        "LGPL-2.1", 
-        "MIT", 
-        "MPL-2.0", 
-        "Unlicense",
-        "None",
-    ],
+    choices: licensesArray,
     name: 'License',   
 },
 {
@@ -75,7 +82,6 @@ const questions = [{
     type: 'input',
     message: 'Enter your EMAIL ADDRESS.',
     name: 'Email',
-    // validate: confirmEmailValid
 },
 ];
 
@@ -101,6 +107,7 @@ function addScreenshots() {
 
 // TODO: Create a function to initialize app
 const init = () => {
+    generateLicenses();
     let screenshots = addScreenshots();
     if (screenshots.length > 0) {
         const screenshotsQuestion = {
@@ -112,9 +119,11 @@ const init = () => {
         questions.push(screenshotsQuestion);
     }
     promptUser()
-    .then((answers) => writeToFile('README.md', generateMarkdown(answers)))
+    .then((answers) => writeToFile('README.md', generateMarkdown(answers, licensesArray)))
     .then(() => console.log('Successfully wrote to README.md'))
     .catch((err) => console.error('OH NO THERE WAS AN ERROR!!!' + err));
+
+    // console.log(answers.License);
 };
 
 // Function call to initialize app
