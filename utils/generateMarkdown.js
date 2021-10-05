@@ -1,31 +1,49 @@
+const axios = require('axios');
+const fs = require('fs');
+
+var licenseSection = '';
+var id = '';
+
+function getLicenseText(license, array) {
+        for (let value of Object.values(array)) {
+            if (value.name == license && value.name !== 'None') {
+                console.log(value);
+                axios.get(value.url)
+                .then(function (response) {
+                    fs.writeFileSync('LICENSE.txt', response.data.body);
+                })
+                .catch(function (error) {
+                    console.log('There was an error with the API call: ' + error);
+                });
+            }
+        }
+}
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
-    if (!license || license == "None") {
+function renderLicenseBadge() {
+    if (!id || id == "None") {
         return '';
     } else {
-        return `![Badge](https://img.shields.io/badge/License-${license.replace(/-/g, '%20')}-orange)`;
+        return `![Badge](https://img.shields.io/badge/License-${id.replace(/-/g, '%20')}-orange)`;
     }
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
-    if (!license || license == "None") {
-        return '';
-    } else {
-        return `https://choosealicense.com/licenses/${license.toLowerCase()}/`;
-    }
-}
-
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {
-    if (!license || license == "None") {
-        return '';
-    } else {
-        return `## License 
-Licensed under the [${license}](${renderLicenseLink(license)}) license.` 
+
+function generateLinks(license, array) {
+    if (license == 'None') {
+        return;
+    }
+    for (let value of Object.values(array)) {
+        if (value.name == license && value.name !== 'None') {
+            console.log(value)
+            id = value.spdx_id;
+            licenseSection = `## License 
+Licensed under the [${license}](https://choosealicense.com/licenses/${value.key}/) license.`;
+        }
     }
 }
 
@@ -56,10 +74,12 @@ function unpackTOC(data) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data, array) {
+    getLicenseText(data.License, array);
+    generateLinks(data.License, array);
         return `# ${data.Title}
 
-${renderLicenseBadge(data.License)}
+${renderLicenseBadge()}
 
 ## Table of Contents
 ${unpackTOC(data)}
@@ -75,7 +95,7 @@ ${data.Installation}
 ## Usage
 ${data.Usage}
 
-${renderLicenseSection(data.License)}
+${licenseSection}
 
 ## Questions
 Any questions?
