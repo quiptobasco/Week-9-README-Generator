@@ -14,6 +14,9 @@ A CLI application to generate a quality README filr for your project using the p
 
 ## Screenshots
 ![screenshot](./assets/images/screenshot.PNG)
+![screenshot](./assets/images/screenshot2.PNG)
+![screenshot](./assets/images/screenshot3.PNG)
+![screenshot](./assets/images/screenshot4.PNG)
 
 ## Installation
 npm i
