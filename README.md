@@ -12,9 +12,9 @@
 ## Description
 A CLI application to generate a quality README file for your project using the provided answers to the prompts.
 
+[Quick video on how to use the application](https://watch.screencastify.com/v/IYwI2WcqTwq5UD7g5Uug).
+
 ## Screenshots
-![screenshot](./assets/images/screenshot.PNG)
-![screenshot](./assets/images/screenshot2.PNG)
 ![screenshot](./assets/images/screenshot3.PNG)
 ![screenshot](./assets/images/screenshot4.PNG)
 
