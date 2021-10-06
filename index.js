@@ -24,17 +24,7 @@ function generateLicenses() {
     });
 }
 
-// function getLicenseText(array) {
-//     for (let value of Object.values(array)) {
-//         if (value.name == license && value.name !== 'None') {
-//     axios.get(URL)
-//     .then(function () {
-//         console.log(response.data);
-//     })
-//     .catch(function (error) {
-//         console.log('There was an error with the API call: ' + error);
-//     });
-// }
+// 
 
 // TODO: Create an array of questions for user input
 const questions = [{
@@ -122,8 +112,6 @@ const init = () => {
     .then((answers) => writeToFile('README.md', generateMarkdown(answers, licensesArray)))
     .then(() => console.log('Successfully wrote to README.md'))
     .catch((err) => console.error('OH NO THERE WAS AN ERROR!!!' + err));
-
-    // console.log(answers.License);
 };
 
 // Function call to initialize app

@@ -10,7 +10,7 @@
 - [License](#license)
 
 ## Description
-A CLI application to generate a quality README filr for your project using the provided answers to the prompts.
+A CLI application to generate a quality README file for your project using the provided answers to the prompts.
 
 ## Screenshots
 ![screenshot](./assets/images/screenshot.PNG)
@@ -22,10 +22,10 @@ A CLI application to generate a quality README filr for your project using the p
 npm i
 
 ## Usage
-node .\index.js
+node index.js
 
 ## License 
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/) license.
+Licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
 ## Questions
 Any questions?

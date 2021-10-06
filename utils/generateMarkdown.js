@@ -40,7 +40,7 @@ function generateLinks(license, array) {
         if (value.name == license && value.name !== 'None') {
             id = value.spdx_id;
             licenseSection = `## License 
-Licensed under the [${license}](https://choosealicense.com/licenses/${value.key}/) license.`;
+Licensed under the [${license}](https://choosealicense.com/licenses/${value.key}/).`;
         }
     }
 }
